@@ -27,6 +27,15 @@ add_compile_definitions(
     SPDLOG_ENABLE_SYSLOG
 )
 
-add_library(${PROJECT_NAME}  ${LIB_SOURCES})
+add_library(${PROJECT_NAME} SHARED ${LIB_SOURCES})
 
 target_link_libraries(${PROJECT_NAME} pthread)
+
+# Specify the installation directory
+set(INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/usr/lib)
+
+# Install the executable
+install(TARGETS ${PROJECT_NAME} DESTINATION ${INSTALL_DIR})
+
+# Install additional files
+install(DIRECTORY ${spdlog_SOURCE_DIR}/include DESTINATION ${CMAKE_INSTALL_PREFIX})
